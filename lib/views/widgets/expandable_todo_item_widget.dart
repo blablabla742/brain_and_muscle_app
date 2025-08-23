@@ -74,6 +74,8 @@ class _ExpandableTodoItemState extends State<ExpandableTodoItem> {
             ),
             value: widget.todo.isDone,
             onChanged: (value) {
+              final todoBloc = context.read<TodoBloc>();
+
               final updatedTodo = widget.todo.copyWith(isDone: value);
               context.read<TodoBloc>().add(UpdateTodo(updatedTodo));
 
@@ -93,7 +95,8 @@ class _ExpandableTodoItemState extends State<ExpandableTodoItem> {
                         final undoneTodo = lastCompletedTodo!.copyWith(
                           isDone: false,
                         );
-                        context.read<TodoBloc>().add(UpdateTodo(undoneTodo));
+                        todoBloc.add(UpdateTodo(undoneTodo));
+                        //context.read<TodoBloc>().add(UpdateTodo(undoneTodo));
                       }
                     },
                     textColor: Colors.white,
@@ -125,10 +128,30 @@ class _ExpandableTodoItemState extends State<ExpandableTodoItem> {
                         id: widget.todo.categoryId,
                         name: 'Unbekannt',
                         createdAt: DateTime.now(),
+                        colorValue: 0xFF9E9E9E, // Fallback-Grau
                       ),
                     );
 
-                    return Card(
+                    final categoryColor = Color(
+                      category.colorValue,
+                    ); // 👈 hier Farbe ableiten
+
+                    return CircleAvatar(
+                      radius: 15,
+                      backgroundColor: categoryColor, // 👈 Farbe verwenden
+                      child: Text(
+                        category
+                            .name
+                            .characters
+                            .first, // 1. Buchstabe der Kategorie
+                        style: const TextStyle(
+                          fontSize: 10.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+
+                    /*return Card(
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
@@ -136,7 +159,7 @@ class _ExpandableTodoItemState extends State<ExpandableTodoItem> {
                           style: const TextStyle(fontSize: 10.0),
                         ),
                       ),
-                    );
+                    );*/
                   } else if (state is CategoryLoading) {
                     return const SizedBox(
                       width: 15,

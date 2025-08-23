@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'widgets/navbar_widget.dart';
 
 List<Widget> pages = [
-  CategoryOverview(),
+  CategoryOverviewPage(),
   TodosOverview(),
   FurtherListsOverview(),
 ];
