@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1052196167642",
+    "project_id": "fir-task-674c3",
+    "storage_bucket": "fir-task-674c3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052196167642:android:80c8ee4ec468fcf509aae3",
+        "android_client_info": {
+          "package_name": "com.example.brain_and_muscle_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMbqFQ0IjHbr5Xm-wLHVzIuCKX5FPN8RI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052196167642:android:14689231aef248a509aae3",
+        "android_client_info": {
+          "package_name": "com.example.my_bloc_firestore_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMbqFQ0IjHbr5Xm-wLHVzIuCKX5FPN8RI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
