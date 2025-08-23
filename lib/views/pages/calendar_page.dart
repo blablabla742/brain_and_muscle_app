@@ -20,6 +20,7 @@ class _TodosOverviewState extends State<TodosOverview> {
     Map<String, List<Todo>> grouped = {};
     for (var todo in todos) {
       if (todo.dueDate == null) continue; // nur mit Datum gruppieren
+      if (todo.isDone) continue; //nur offene Todos
       String dateKey = todo.dueDate!.toIso8601String().substring(0, 10);
 
       if (!grouped.containsKey(dateKey)) {

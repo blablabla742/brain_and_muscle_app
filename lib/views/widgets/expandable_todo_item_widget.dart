@@ -21,13 +21,14 @@ class ExpandableTodoItem extends StatefulWidget {
 class _ExpandableTodoItemState extends State<ExpandableTodoItem> {
   //bool _isExpanded = false;
   final TextEditingController _controller = TextEditingController();
+  Todo? lastCompletedTodo; // das zuletzt abgeschlossene Todo
 
   @override
   void initState() {
     super.initState();
-    print(
+    /*print(
       '[DEBUG] ${widget.todo.title} hat ${widget.todo.subtasks.length} Subtasks.',
-    );
+    );*/
   }
 
   void addSubtaskToTodo(String title) {
@@ -75,12 +76,29 @@ class _ExpandableTodoItemState extends State<ExpandableTodoItem> {
             onChanged: (value) {
               final updatedTodo = widget.todo.copyWith(isDone: value);
               context.read<TodoBloc>().add(UpdateTodo(updatedTodo));
+
+              if (value == true) lastCompletedTodo = widget.todo;
+
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  duration: Duration(milliseconds: 500),
                   content: Text(
-                    value! ? 'Aufgabe abgeschlossen' : 'Aufgabe reaktiviert',
+                    value!
+                        ? 'Aufgabe "${widget.todo.title}" abgeschlossen'
+                        : 'Aufgabe "${widget.todo.title}" reaktiviert',
                   ),
+                  action: SnackBarAction(
+                    label: '↩️ Rückgängig', // 🔹 Emoji als Icon-Alternative
+                    onPressed: () {
+                      if (lastCompletedTodo != null) {
+                        final undoneTodo = lastCompletedTodo!.copyWith(
+                          isDone: false,
+                        );
+                        context.read<TodoBloc>().add(UpdateTodo(undoneTodo));
+                      }
+                    },
+                    textColor: Colors.white,
+                  ),
+                  duration: const Duration(seconds: 10),
                 ),
               );
             },
